@@ -1,8 +1,9 @@
 import telebot
-import config
+from config import TOKEN, USERS, ADMIN_USER
 from telebot import types
 
 bot = telebot.TeleBot(TOKEN)
+
 new_name_queue = False
 queue_name = ""
 queue = []
