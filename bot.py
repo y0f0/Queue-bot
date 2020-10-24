@@ -23,8 +23,8 @@ def send_welcome(message):
 
         # keyboard
 
-        markup = types.ReplyKeyboardMarkup(row_width=2)
-        item1 = types.KeyboardButton("Показать последнию очередь:")
+        markup = types.ReplyKeyboardMarkup(row_width=1)
+        item1 = types.KeyboardButton("Показать последнию очередь")
         item2 = types.KeyboardButton("Добавить новую очередь")
 
         markup.add(item1, item2)
@@ -38,8 +38,8 @@ def send_welcome(message):
 
         # keyboard
 
-        markup = types.ReplyKeyboardMarkup(row_width=2)
-        item1 = types.KeyboardButton("Показать последнию очередь:")
+        markup = types.ReplyKeyboardMarkup(row_width=1)
+        item1 = types.KeyboardButton("Показать последнию очередь")
         item2 = types.KeyboardButton("Встать в очередь")
 
         markup.add(item1, item2)
