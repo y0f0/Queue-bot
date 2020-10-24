@@ -60,7 +60,7 @@ def processing_test(message):
     chat_id = message.chat.id
 
     if username in ADMIN_USER:
-        if message.text == "Показать последнию очередь:":
+        if message.text == "Показать последнию очередь":
             bot.send_message(chat_id, queue_name + ":")
             for i in range(len(queue)):
                 string = str(i + 1) + ". " + queue[i][2] + " (@" + queue[i][3] + ")" 
@@ -77,7 +77,7 @@ def processing_test(message):
         else:
             bot.send_message(chat_id, "Error")
     elif USERS.get(username) is not None:
-        if message.text == "Показать последнию очередь:":
+        if message.text == "Показать последнию очередь":
             bot.send_message(chat_id, queue_name + ":")
             for i in range(len(queue)):
                 string = str(i + 1) + ". " + queue[i][2] + " (@" + queue[i][3] + ")" 
