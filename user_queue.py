@@ -46,6 +46,11 @@ class Queue:
 
         return None
 
+    def remove(self, tag, lab):
+        query = self.record_present(tag, lab, 0)
+        if query is None: raise ValueError("the record with tag \"" + tag + "\" and lab " + str(lab) + " is not present")
+        return self.mem.pop(query.index)
+
     def push(self, x):
         if not isinstance(x, QueueElement): 
             raise TypeError("the `other` argument wasn't an instance of `QueueElement`")
