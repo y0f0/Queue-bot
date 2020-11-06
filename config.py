@@ -29,4 +29,4 @@ USERS = {
     'george_shulyak': 'Шуляк Георгий Владимирович',
     'deworld': 'Энкеев Баир Энкеевич'
 }
-LAB_COUNT = 4
+LAB_COUNT = 5
