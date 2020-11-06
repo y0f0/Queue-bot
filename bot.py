@@ -132,7 +132,7 @@ def process_lab_append_info(message):
     except ValueError:
         bot.send_message(chat_id, "Неправильный формат ввода.")
 
-    if lab <= 0:
+    if lab is not None and lab <= 0:
         bot.send_message(chat_id, "Неправильный формат ввода.")
         lab = None
            
@@ -193,7 +193,7 @@ def process_lab_remove_info(message):
     except ValueError:
         bot.send_message(chat_id, "Неправильный формат ввода.")
     
-    if lab <= 0:
+    if lab is not None and lab <= 0:
         bot.send_message(chat_id, "Неправильный формат ввода.")
         lab = None
            
