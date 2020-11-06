@@ -198,6 +198,7 @@ def process_lab_remove_info(message):
     state_table[username] = BotState.READING_COMMAND
 
 for user in USERS: state_table[user] = BotState.READING_COMMAND
+for user in ADMIN_USER: state_table[user] = BotState.READING_COMMAND
 
 try:
     init_leaderboard(LAB_COUNT)
