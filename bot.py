@@ -78,7 +78,9 @@ def log_queue(chat_id):
         
     bot.send_message(chat_id, queue_name + ":") 
     for (i, s) in enumerate(map(str, iter(Q))):
-        bot.send_message(chat_id, "Запись №" + str(i + 1) + "\n" + s, parse_mode = "MarkdownV2")
+        msg = "Запись номер " + str(i + 1) + "\n" + s
+        #print(msg)
+        bot.send_message(chat_id, msg, parse_mode = "HTML")
 
 @bot.message_handler(content_types=["text"], func = lambda msg: state_table[msg.from_user.username] == BotState.READING_COMMAND)
 def process_command(message):

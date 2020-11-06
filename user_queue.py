@@ -14,9 +14,9 @@ class QueueElement:
         name = config.USERS.get(self.tag)
         if name is None: raise ValueError("The tag \"" + self.tag + "\" is not present in the registry")
 
-        line1 = name + " \\(@" + self.tag + "\\)\n"
-        line2 = "*Лаба*: " + str(self.lab) + "\n"
-        line3 = "*Рейтинг на PCMS*: " + str(self.prior) + "\n"
+        line1 = name + " (@" + self.tag + ")\n"
+        line2 = "<b>Лаба</b>: " + str(self.lab) + "\n"
+        line3 = "<b>Рейтинг на PCMS</b>: " + str(self.prior) + "\n"
 
         return line1 + line2 + line3
 
