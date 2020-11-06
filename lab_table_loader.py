@@ -38,7 +38,7 @@ def load_lab_leaderboard(lab):
         raise LeaderboardLoadError(lab, "Failed to find the lab file")
 
     for (i, name) in it: 
-        leaderboard[lab - 1][name] = i
+        leaderboard[lab - 1][name] = i + 1
     print("Leaderboard for lab " + str(lab) + " has been loaded")
 
 def init_leaderboard(last_lab):
