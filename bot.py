@@ -116,7 +116,7 @@ def process_command(message):
     else:
         bot.send_message(chat_id, "Неопознанная команда или у Вас нет прав на такую команду")
 
-@bot.message_handler(content_types=["text"], func = lambda msg: state_table[msg.from_user.username] == BotState.READING_LAB_APPEND_DATA)
+@bot.message_handler(content_types=["text"], func = lambda msg: msg.from_user.username in USERS and state_table[msg.from_user.username] == BotState.READING_LAB_APPEND_DATA)
 def process_lab_append_info(message):
     global Q, queue_name, bot, state_table
     username = message.from_user.username
