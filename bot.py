@@ -129,12 +129,12 @@ def process_lab_append_info(message):
 
     try:
         lab = int(message.text.strip())
+        if lab <= 0:
+            bot.send_message(chat_id, "Неправильный формат ввода.")
+            lab = None
     except ValueError:
         bot.send_message(chat_id, "Неправильный формат ввода.")
-        
-    if lab <= 0:
-        bot.send_message(chat_id, "Неправильный формат ввода.")
-        lab = None
+
 
     if lab is not None:
         query = Q.record_present(username, lab, rating)
@@ -190,12 +190,11 @@ def process_lab_remove_info(message):
 
     try:
         lab = int(message.text.strip())
+        if lab <= 0:
+            bot.send_message(chat_id, "Неправильный формат ввода.")
+            lab = None
     except ValueError:
         bot.send_message(chat_id, "Неправильный формат ввода.")
-
-    if lab <= 0:
-        bot.send_message(chat_id, "Неправильный формат ввода.")
-        lab = None
 
     if lab is not None:
         query = Q.record_present(username, lab, 0)
