@@ -82,7 +82,7 @@ def log_queue(chat_id):
         #print(msg)
         bot.send_message(chat_id, msg, parse_mode = "HTML")
 
-@bot.message_handler(content_types=["text"], func = lambda msg: state_table[msg.from_user.username] == BotState.READING_COMMAND)
+@bot.message_handler(content_types=["text"], func = lambda msg: msg.from_user.username in USERS and state_table[msg.from_user.username] == BotState.READING_COMMAND)
 def process_command(message):
     global Q, queue_name, bot, state_table, handing_stats
     username = message.from_user.username
@@ -161,7 +161,7 @@ def process_lab_append_info(message):
 
     state_table[username] = BotState.READING_COMMAND
 
-@bot.message_handler(content_types=["text"], func = lambda msg: state_table[msg.from_user.username] == BotState.READING_QUEUE_NAME)
+@bot.message_handler(content_types=["text"], func = lambda msg: msg.from_user.username in USERS and state_table[msg.from_user.username] == BotState.READING_QUEUE_NAME)
 def process_new_queue_name(message):
     global Q, queue_name, bot, state_table
     username = message.from_user.username
@@ -177,7 +177,7 @@ def process_new_queue_name(message):
 
     state_table[username] = BotState.READING_COMMAND
 
-@bot.message_handler(content_types=["text"], func = lambda msg: state_table[msg.from_user.username] == BotState.READING_LAB_REMOVE_DATA)
+@bot.message_handler(content_types=["text"], func = lambda msg: msg.from_user.username in USERS and state_table[msg.from_user.username] == BotState.READING_LAB_REMOVE_DATA)
 def process_lab_remove_info(message):
     global Q, queue_name, bot, state_table
     username = message.from_user.username
