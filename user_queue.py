@@ -56,7 +56,7 @@ class Queue:
             raise TypeError("the `other` argument wasn't an instance of `QueueElement`")
 
         self.mem.append(x)
-        self.mem.sort(key = lambda x: (x.lab, -x.prior))
+        self.mem.sort(key = lambda x: (x.lab, x.prior))
 
 class QueueIterator:
     orig = Queue()
