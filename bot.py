@@ -75,8 +75,8 @@ def send_welcome(message):
 
 def log_queue(chat_id):
     global Q, bot, queue_name
-        
-    bot.send_message(chat_id, queue_name + ":") 
+
+    bot.send_message(chat_id, queue_name + ":")
     for (i, s) in enumerate(map(str, iter(Q))):
         msg = "Запись номер " + str(i + 1) + "\n" + s
         #print(msg)
@@ -123,7 +123,7 @@ def process_lab_append_info(message):
     chat_id = message.chat.id
 
     is_admin = username in ADMIN_USER
-    is_student = USERS.get(username) is not None 
+    is_student = USERS.get(username) is not None
 
     lab, rating = None, None
 
@@ -131,11 +131,11 @@ def process_lab_append_info(message):
         lab = int(message.text.strip())
     except ValueError:
         bot.send_message(chat_id, "Неправильный формат ввода.")
-
+        
     if lab <= 0:
         bot.send_message(chat_id, "Неправильный формат ввода.")
         lab = None
-           
+
     if lab is not None:
         query = Q.record_present(username, lab, rating)
         if query is not None: bot.send_message(chat_id, "Ты уже есть в очереди!")
@@ -144,13 +144,13 @@ def process_lab_append_info(message):
             rating = None
             err_msg = None
 
-            if lab > len(leaderboard): 
+            if lab > len(leaderboard):
                 err_msg = "Приносим свои извинения, но у нас пока не загружена таблица лабы №" + str(lab) + ".\n" + err_msg_ps
                 print("Lab `" + str(lab) + "` leaderboard isn't loaded")
-            elif name not in leaderboard[lab - 1]: 
+            elif name not in leaderboard[lab - 1]:
                 err_msg = "Приносим свои извинения, но мы не нашли Вас в таблице лабы №" + str(lab) + ".\nВозможно наши данные устарели.\n" + err_msg_ps
                 print("`" + name + "` isn't present in lab number " + str(lab) + "leaderboard")
-            else: 
+            else:
                 rating = leaderboard[lab - 1][name]
 
             if rating is None:
@@ -168,13 +168,13 @@ def process_new_queue_name(message):
     chat_id = message.chat.id
 
     is_admin = username in ADMIN_USER
-    is_student = USERS.get(username) is not None 
+    is_student = USERS.get(username) is not None
 
     Q = Queue()
     queue_name = message.text
-    
+
     bot.send_message(chat_id, "Название очереди изменено на `" + queue_name + "`")
-    
+
     state_table[username] = BotState.READING_COMMAND
 
 @bot.message_handler(content_types=["text"], func = lambda msg: state_table[msg.from_user.username] == BotState.READING_LAB_REMOVE_DATA)
@@ -184,7 +184,7 @@ def process_lab_remove_info(message):
     chat_id = message.chat.id
 
     is_admin = username in ADMIN_USER
-    is_student = USERS.get(username) is not None 
+    is_student = USERS.get(username) is not None
 
     lab = None
 
@@ -192,17 +192,17 @@ def process_lab_remove_info(message):
         lab = int(message.text.strip())
     except ValueError:
         bot.send_message(chat_id, "Неправильный формат ввода.")
-    
+
     if lab <= 0:
         bot.send_message(chat_id, "Неправильный формат ввода.")
         lab = None
-           
+
     if lab is not None:
         query = Q.record_present(username, lab, 0)
-        if query is not None: 
+        if query is not None:
             Q.remove(username, lab)
             bot.send_message(chat_id, "Ваша запись удалена. Теперь вы не сдаёте лабу номер " + str(lab))
-        else: 
+        else:
             bot.send_message(chat_id, "Ты эту лабу и так не сдаёшь!")
 
     state_table[username] = BotState.READING_COMMAND
