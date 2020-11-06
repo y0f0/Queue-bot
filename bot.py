@@ -134,6 +134,7 @@ def process_lab_append_info(message):
 
     if lab <= 0:
         bot.send_message(chat_id, "Неправильный формат ввода.")
+        lab = None
            
     if lab is not None:
         query = Q.record_present(username, lab, rating)
@@ -194,6 +195,7 @@ def process_lab_remove_info(message):
     
     if lab <= 0:
         bot.send_message(chat_id, "Неправильный формат ввода.")
+        lab = None
            
     if lab is not None:
         query = Q.record_present(username, lab, 0)
