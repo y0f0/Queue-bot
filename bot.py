@@ -82,7 +82,13 @@ def log_queue(chat_id):
         #print(msg)
         bot.send_message(chat_id, msg, parse_mode = "HTML")
 
-@bot.message_handler(content_types=["text"], func = lambda msg: msg.from_user.username in USERS and state_table[msg.from_user.username] == BotState.READING_COMMAND)
+
+@bot.message_handler(func = lambda msg: msg.from_user.username not in state_table)
+def process_command(message):
+    chat_id = message.chat.id
+    bot.send_message(chat_id, "Привет, я тебя не знаю!\nЯ не умею работать с пользователей, которых не знаю!\nНапиши Никите Пологову, возможно это какая-то ошибка")
+
+@bot.message_handler(content_types=["text"], func = lambda msg: msg.from_user.username in state_table and state_table[msg.from_user.username] == BotState.READING_COMMAND)
 def process_command(message):
     global Q, queue_name, bot, state_table, handing_stats
     username = message.from_user.username
@@ -116,7 +122,7 @@ def process_command(message):
     else:
         bot.send_message(chat_id, "Неопознанная команда или у Вас нет прав на такую команду")
 
-@bot.message_handler(content_types=["text"], func = lambda msg: msg.from_user.username in USERS and state_table[msg.from_user.username] == BotState.READING_LAB_APPEND_DATA)
+@bot.message_handler(content_types=["text"], func = lambda msg: msg.from_user.username in state_table and state_table[msg.from_user.username] == BotState.READING_LAB_APPEND_DATA)
 def process_lab_append_info(message):
     global Q, queue_name, bot, state_table
     username = message.from_user.username
@@ -161,7 +167,7 @@ def process_lab_append_info(message):
 
     state_table[username] = BotState.READING_COMMAND
 
-@bot.message_handler(content_types=["text"], func = lambda msg: msg.from_user.username in USERS and state_table[msg.from_user.username] == BotState.READING_QUEUE_NAME)
+@bot.message_handler(content_types=["text"], func = lambda msg: msg.from_user.username in state_table and state_table[msg.from_user.username] == BotState.READING_QUEUE_NAME)
 def process_new_queue_name(message):
     global Q, queue_name, bot, state_table
     username = message.from_user.username
@@ -177,7 +183,7 @@ def process_new_queue_name(message):
 
     state_table[username] = BotState.READING_COMMAND
 
-@bot.message_handler(content_types=["text"], func = lambda msg: msg.from_user.username in USERS and state_table[msg.from_user.username] == BotState.READING_LAB_REMOVE_DATA)
+@bot.message_handler(content_types=["text"], func = lambda msg: msg.from_user.username in state_table and state_table[msg.from_user.username] == BotState.READING_LAB_REMOVE_DATA)
 def process_lab_remove_info(message):
     global Q, queue_name, bot, state_table
     username = message.from_user.username
