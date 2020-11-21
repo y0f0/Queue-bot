@@ -29,7 +29,7 @@ class QueueElement:
 
     def key(self):
         try:
-            rating = get_user_rating_silent(self.tag, self.lab)
+            rating = get_user_rating(self.tag, self.lab)
             return (self.lab, rating)
         except:
             return (self.lab, 10**100)
