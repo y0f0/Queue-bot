@@ -98,6 +98,8 @@ class Queue:
             except LeaderboardUserError as err: print("[QUEUE_RECOVER_ROUTINE] line \"" + l + "\" discarded (" + str(err) + ")")
             except: print("[QUEUE_RECOVER_ROUTINE] line \"" + l + "\" discarded (Uexpected error)")
 
+            self.balance()
+
 class QueueIterator:
     orig = Queue()
     i = 0
