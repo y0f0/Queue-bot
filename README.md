@@ -7,4 +7,5 @@
 
 Бот находится по адрессу @QueueLabsM3103_beta_bot в телеграмме и задеплоин на heroku.
 
-![Alt Text](graphics/gif.gif)
+<img src="graphics/gif.gif" width="400" height="790">
+
